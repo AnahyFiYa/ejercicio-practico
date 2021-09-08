@@ -1,0 +1,7 @@
+**/*.html
+**/*.md
+**/*.min.css
+**/dist/
+**/docs_html/
+**/plugins/
+**/node_modules/
