@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Ejercicio | Practico</title>
+        <meta name="keywords" content="Plantilla ejercicio practico" />
+
+        <meta name="responsive" content="no-cache" http-equiv="Cache-Control" />
+        <meta name="responsive" content="charset=UTF-8" http-equiv="Content-Type" />
+
+        <meta name="viewport" content="maximum-scale=1, user-scalable=no, width=device-width, initial-scale=1" />
+
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> <!-- tu logo aqui -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+
+        <link rel="stylesheet" href="/css/toastr.min.css" />
+        <link rel="stylesheet" href="/css/chartJS/Chart.css" />
+        <link rel="stylesheet" href="/css/chartJs/Chart.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap/bootstrap.css" />
+        <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap/buttons.bootstrap4.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap/bootstrap-table.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap/bootstrap-switch-button.css" />
+        <link rel="stylesheet" href="/css/bootstrap/responsive.bootstrap4.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap/bootstrap-switch-button.min.css" />
+
+        <link rel="stylesheet" href="/plugins/dataTable/datatables.min.css" />
+        <link rel="stylesheet" href="/plugins/dataTable/datatables/css/dataTables.bootstrap4.min.css" />
+
+        <link rel="stylesheet" href="/plugins/adminLTE/css/ionicons.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/css/adminlte.min.css" />
+
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/chart/css/Chart.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/toastr/css/toastr.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/select2/css/select2.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/fontawesome-free/css/all.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/summernote/css/summernote.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/sweetalert2/css/sweetalert2.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/summernote/css/summernote-bs4.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/select2/css/select2-bootstrap4.min.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/daterangepicker/css/daterangepicker.css" />
+        <link rel="stylesheet" href="/plugins/adminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+
+        <link rel="stylesheet" href="/css/index.css" />
+
+        <script src="/js/popper/popper.js"></script>
+        <script src="/js/sweetalert2/sweetalert2.js"></script>
+        <script src="/js/jquery/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+        <script>
+            var caesar =
+                caesar ||
+                (function () {
+                    var doStaff = function (txt, desp, action) {
+                        var replace = (function () {
+                            var abc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+                            var l = abc.length;
+                            return function (c) {
+                                var i = abc.indexOf(c.toLowerCase());
+                                if (i != -1) {
+                                    var pos = i;
+                                    if (action) {
+                                        // forward
+                                        pos += desp;
+                                        pos -= pos >= l ? l : 0;
+                                    } else {
+                                        // backward
+                                        pos -= desp;
+                                        pos += pos < 0 ? l : 0;
+                                    }
+                                    return abc[pos];
+                                }
+                                return c;
+                            };
+                        })();
+                        var re = /([a-z])/gi;
+                        return String(txt).replace(re, function (match) {
+                            return replace(match);
+                        });
+                    };
+
+                    return {
+                        encode: function (txt, desp) {
+                            return doStaff(txt, desp, true);
+                        },
+                        decode: function (txt, desp) {
+                            return doStaff(txt, desp, false);
+                        },
+                    };
+                })();
+
+            function codificar() {
+                document.getElementById("resultado").innerHTML = caesar.encode(document.getElementById("cadena").value, 3);
+            }
+            function decodificar() {
+                document.getElementById("resultado").innerHTML = caesar.decode(document.getElementById("cadena").value, 3);
+            }
+        </script>
+
+        <style>
+            textarea {
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body class="hold-transition layout-top-nav">
+        <div class="wrapper">
+            <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+                <div class="container">
+                    <a href="/index.html" class="navbar-brand">
+                        <span class="brand-text fz-25 fw-700">Ejercicio Practico</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="content-wrapper">
+                <div class="content pt-3">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-5 col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-2">
+                                        <div class="card bg-gradient-dark">
+                                            <div class="card-header">
+                                                <h3 class="card-title">
+                                                    <i class="fas fa-temperature-low"></i>
+                                                    Clima
+                                                </h3>
+                                            </div>
+                                            <div class="card-body p-2">
+                                                <div class="p-0">
+                                                    <h5 class="m-0">
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <span>
+                                                            <span id="divCiudad"></span>
+                                                            <span>, </span>
+                                                            <span id="divEstado"></span>
+                                                        </span>
+                                                    </h5>
+                                                    <p class="m-0">
+                                                        <span>
+                                                            <span id="divFechaN"></span>
+                                                            <span>., </span>
+                                                            <span id="divFechaD"></span>
+                                                        </span>
+                                                        <span> de </span>
+                                                        <span id="divFechaM"></span>
+                                                        <span id="divFechaA"></span>
+                                                    </p>
+                                                    <div class="row my-0 mr-0 ml-2">
+                                                        <div class="py-0 px-1">
+                                                            <span class="temp-info">
+                                                                <span class="fz-03" style="vertical-align: middle; margin: 0px"><i id="icon" class="fas fa-sun"></i></span>
+                                                                <h1 id="temp" class="temp fz-04 m-0">
+                                                                    <span>
+                                                                        <span id="divTempr" class="fz-04"></span>
+                                                                        <span class="badge bg-temp">
+                                                                            <a class="celsius active" id="btn-celsius">°C</a>
+                                                                        </span>
+                                                                    </span>
+                                                                </h1>
+                                                            </span>
+                                                        </div>
+                                                        <div class="py-0 px-1">
+                                                            <div class="p-0">
+                                                                <p id="divClima" class="tempLimits"></p>
+                                                                <ul class="p-0 m-0" style="list-style: none">
+                                                                    <li class="lh-16 p-0">
+                                                                        <span class="fz-14"> <span id="divTempAlta"></span><span>°</span> </span>
+                                                                        <span class="fz-14" style="margin: 0px 2px">/</span>
+                                                                        <span class="fz-14"> <span id="divTempBaja"></span><span>°</span> </span>
+                                                                    </li>
+                                                                    <li class="lh-16 p-0">
+                                                                        <span class="fz-14 lh-12">Sensación térmica: </span>
+                                                                        <span id="divSensacion" class="fz-14"></span>
+                                                                        <span class="fz-14 lh-10">°</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="row p-0 m-0">
+                                                                    <div class="col-4">
+                                                                        <span class="fz-10 lh-11">
+                                                                            <i class="fas fa-cloud-rain"></i>
+                                                                        </span>
+                                                                        <span id="divNubesP" class="fz-12"></span>
+                                                                        <span class="fz-10 lh-11">%</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span class="fz-10 lh-4">
+                                                                            <i class="fas fa-tachometer-alt"></i>
+                                                                        </span>
+                                                                        <span id="divPress" class="fz-11"></span>
+                                                                        <span class="fz-10 lh-11"> hPa</span>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <span class="fz-10 lh-4">
+                                                                            <i class="fas fa-tint"></i>
+                                                                        </span>
+                                                                        <span id="divHumed" class="fz-11"></span>
+                                                                        <span class="fz-10 lh-11">%</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span class="fz-10 lh-4">
+                                                                            <i class="far fa-eye"></i>
+                                                                        </span>
+                                                                        <span id="divVisib" class="fz-11"></span>
+                                                                        <span class="fz-10 lh-11">km/h</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="forecast" class="row mx-0 my-3"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-10">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title m-0"><i class="fas fa-pencil-alt"></i> Información</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="form-group mb-2 mx-2 w-100">
+                                                        <div class="actions-group">
+                                                            <a id="lnkClip">
+                                                                <label id="fileClip" class="btn-elect this" for="btnArchivo"><i class="fas fa-paperclip"></i> Cargar hoja de excel aqui</label>
+                                                                <input id="btnArchivo" class="" type="file" accept=".xlsx, .xls, .csv" style="display: none" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2 mx-2 w-100">
+                                                        <a id="btnRotate" class="btn btn-rotate"> <span id="spCountRt" class="badge-count bg-teal hidden">2</span> Rotar clave de alumno</a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex">
+                                                    <div class="w-50 mb-2 mx-2">
+                                                        <div class="info-box m-0" style="min-height: auto">
+                                                            <span class="info-box-icon bg-outline-info fw-25"><i class="far fa-chart-bar"></i></span>
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text fz-12 fw-600">Promedio</span>
+                                                                <span class="info-box-number fz-14 fw-600 lh-14" id="txtPromedio"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100 mb-2 mx-2">
+                                                        <div class="info-box m-0" style="min-height: auto">
+                                                            <span class="info-box-icon bg-outline-success fw-25"><i class="far fa-grin-stars"></i></span>
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text fz-12 fw-600">Calificación más alta</span>
+                                                                <span class="info-box-number fz-14 fw-600 lh-14" id="txtTop"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100 mb-2 mx-2">
+                                                        <div class="info-box m-0" style="min-height: auto">
+                                                            <span class="info-box-icon bg-outline-warning fw-25"><i class="far fa-frown"></i></span>
+
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text fz-12 fw-600">Calificación más baja</span>
+                                                                <span class="info-box-number fz-14 fw-600 lh-14" id="txtLow"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <table id="tblAlumnos" class="display" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-priority="0" class="control"></th>
+                                                            <th data-priority="6" class="noVisible"></th>
+                                                            <th data-priority="1">Nombre completo</th>
+                                                            <th data-priority="5">Fecha nacimiento</th>
+                                                            <th data-priority="4">Salón</th>
+                                                            <th data-priority="3">Calificación</th>
+                                                            <th data-priority="2">Clave</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="card hidden" id="divGrafica">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="fas fa-chart-pie mr-1"></i>Gráfica</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <canvas id="chrtCalificaciones" width="400" height="150"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <div class="float-right d-none d-sm-inline">Ejercicio Practico</div>
+                <strong>Sep 2021</strong>
+            </footer>
+        </div>
+
+        <script src="/js/cesar-code.js"></script>
+        <script src="/js/popper/popper.min.js"></script>
+
+        <script src="/js/chartJs/Chart.js"></script>
+        <script src="/js/chartJs/Chart.min.js"></script>
+        <script src="/js/chartJS/Chart.bundle.js"></script>
+        <script src="/js/chartJs/Chart.bundle.min.js"></script>
+
+        <script src="/js/bootstrap/bootstrap-table.js"></script>
+        <script src="/js/bootstrap/bootstrap-table.min.js"></script>
+        <script src="/js/bootstrap/bootstrap-table-export.js"></script>
+        <script src="/js/bootstrap/bootstrap-table-export.min.js"></script>
+        <script src="/js/bootstrap/bootstrap-table-locale-all.js"></script>
+        <script src="/js/bootstrap/bootstrap-switch-button.min.js"></script>
+        <script src="/js/bootstrap/bootstrap-table-locale-all.min.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+        <script src="/plugins/dataTable/responsive/js/dataTables.responsive.min.js"></script>
+        <script src="/plugins/dataTable/datatables/js/dataTables.bootstrap4.min.js"></script>
+        <script src="/plugins/dataTable/responsive/js/responsive.bootstrap4.min.js"></script>
+
+        <script src="/plugins/dataTable/jsZip/jszip.min.js"></script>
+        <script src="/plugins/dataTable/buttons/js/buttons.print.min.js"></script>
+        <script src="/plugins/dataTable/buttons/js/buttons.html5.min.js"></script>
+        <script src="/plugins/dataTable/buttons/js/buttons.colVis.min.js"></script>
+        <script src="/plugins/dataTable/buttons/js/buttons.bootstrap4.min.js"></script>
+
+        <script src="/plugins/adminLTE/js/adminlte.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/chart/js/Chart.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/toastr/js/toastr.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/moment/js/moment.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/select2/js/select2.full.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/daterangepicker/js/daterangepicker.js"></script>
+        <script src="/plugins/adminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+        <script src="/plugins/adminLTE/plugins/sweetalert2/js/sweetalert2.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/sweetalert2/js/sweetalert2.all.min.js"></script>
+
+        <script src="/plugins/adminLTE/plugins/bootstrap/js/bootstrap-switch.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="/plugins/adminLTE/plugins/summernote/js/summernote.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/summernote/js/summernote-bs4.min.js"></script>
+        <script src="/plugins/adminLTE/plugins/summernote/js/summernote-lite.min.js"></script>
+
+        <script src="/plugins/adminLTE/plugins/jquery/js/jquery.min.js"></script>
+    </body>
+</html>
